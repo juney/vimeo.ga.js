@@ -41,14 +41,14 @@ $(function() {
 
             case 'seek':
                 if (trackSeeking && !videoSeeking) {
-                    ga('send', 'event', 'Vimeo', 'Skipped video forward or backward', url, undefined, true);
+                    ga('send', 'event', 'vimeo', 'skipped video forward or backward', url, undefined, true);
                     videoSeeking = true; // Avoid subsequent seek trackings
                 }
                 break;
 
             case 'play':
                 if (!videoPlayed) {
-                    ga('send', 'event', 'Vimeo', 'Started video', url, undefined, true);
+                    ga('send', 'event', 'vimeo', 'started video', url, undefined, true);
                     videoPlayed = true; //  Avoid subsequent play trackings
                 }
                 break;
@@ -59,7 +59,7 @@ $(function() {
 
             case 'finish':
                 if (!videoCompleted) {
-                    ga('send', 'event', 'Vimeo', 'Completed video', url, undefined, true);
+                    ga('send', 'event', 'vimeo', 'completed video', url, undefined, true);
                     videoCompleted = true; // Avoid subsequent finish trackings
                 }
                 break;
@@ -96,7 +96,7 @@ $(function() {
 
     function onPause() {
         if (timePercentComplete < 99 && !videoPaused) {
-            ga('send', 'event', 'Vimeo', 'Paused video', url, undefined, true);
+            ga('send', 'event', 'vimeo', 'paused video', url, undefined, true);
             videoPaused = true; // Avoid subsequent pause trackings
         }
     }
@@ -112,22 +112,22 @@ $(function() {
         var progress;
 
         if (timePercentComplete > 24 && !progress25) {
-            progress = 'Played video: 25%';
+            progress = 'played video: 25%';
             progress25 = true;
         }
 
         if (timePercentComplete > 49 && !progress50) {
-            progress = 'Played video: 50%';
+            progress = 'played video: 50%';
             progress50 = true;
         }
 
         if (timePercentComplete > 74 && !progress75) {
-            progress = 'Played video: 75%';
+            progress = 'played video: 75%';
             progress75 = true;
         }
 
         if (progress) {
-            ga('send', 'event', 'Vimeo', progress, url, undefined, true);
+            ga('send', 'event', 'vimeo', progress, url, undefined, true);
         }
     }
 
