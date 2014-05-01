@@ -78,6 +78,12 @@ The event trackers do not impact bounce rate of the page which embeds the video.
 Have a bug? Please create an issue here on GitHub!
 
 ## Changelog
+
+### 0.3 (May 1, 2014):
+ * Modify to work with Universal Analytics (analytics.js).
+ * Include check for 'http:' in iframe src (and add it if missing).
+ * Update documentation.
+ 
 ### 0.2 (February 3, 2013):
  * Code cleanup.
  * Fixed a bug in pause event tracking.
