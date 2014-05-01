@@ -6,7 +6,7 @@ Include the scripts in the body section of the HTML document, just before the `<
 
 ### Basic
 ```html
-<iframe src="http://player.vimeo.com/video/22439234?api=1" width="640" height="390" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<iframe src="//player.vimeo.com/video/22439234?api=1" width="640" height="390" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'></script>
 <script src="path/to/vimeo.ga.min.js"></script>
 ```	
