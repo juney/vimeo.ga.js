@@ -1,5 +1,5 @@
-# Google Analytics Vimeo Video Tracking
-Tracking Vimeo Player Events with Google Analytics.
+# Google Analytics Vimeo Video Tracking for Universal Analytics (analytics.js)
+Tracking Vimeo Player Events with Google Analytics for Universal Analytics (analytics.js). This is based off <a href="http://github.com/sanderheilbron/vimeo.ga.js">sanderheilbron/vimeo.ga.js</a>.
 
 ## Usage
 Include the scripts in the body section of the HTML document, just before the `</body>` tag. You’ll need to be running on a web server instead of opening the file directly in your browser. Flash and JS security restrictions will prevent the API from working when run locally.
@@ -41,9 +41,9 @@ All player events are only tracked once. Restarting the video will not reset the
 
 #####Example
 ```js
-_gaq.push(['_trackEvent', 'Vimeo', 'Started video', 'http://player.vimeo.com/video/22439234', undefined, true]);
-_gaq.push(['_trackEvent', 'Vimeo', 'Paused video', 'http://player.vimeo.com/video/22439234', undefined, true]);
-_gaq.push(['_trackEvent', 'Vimeo', 'Completed video', 'http://player.vimeo.com/video/22439234', undefined, true]);
+ga('send', 'event', 'Vimeo', 'Started video', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'Vimeo', 'Paused video', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'Vimeo', 'Completed video', 'http://player.vimeo.com/video/22439234', undefined, true);
 ```
 ### Progress event trackers
 
@@ -56,9 +56,9 @@ _gaq.push(['_trackEvent', 'Vimeo', 'Completed video', 'http://player.vimeo.com/v
 
 #####Example
 ```js
-_gaq.push(['_trackEvent', 'Vimeo', 'Played video: 25%', 'http://player.vimeo.com/video/22439234', undefined, true]);
-_gaq.push(['_trackEvent', 'Vimeo', 'Played video: 50%', 'http://player.vimeo.com/video/22439234', undefined, true]);
-_gaq.push(['_trackEvent', 'Vimeo', 'Played video: 75%', 'http://player.vimeo.com/video/22439234', undefined, true]);
+ga('send', 'event', 'Vimeo', 'Played video: 25%', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'Vimeo', 'Played video: 50%', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'Vimeo', 'Played video: 75%', 'http://player.vimeo.com/video/22439234', undefined, true);
 ```
 ### Seek event tracker
 * Category: Vimeo
@@ -68,7 +68,7 @@ _gaq.push(['_trackEvent', 'Vimeo', 'Played video: 75%', 'http://player.vimeo.com
 
 #####Example
 ```js
-_gaq.push(['_trackEvent', 'Vimeo', 'Skipped video forward or backward', 'http://player.vimeo.com/video/22439234', undefined, true]);
+ga('send', 'event', 'Vimeo', 'Skipped video forward or backward', 'http://player.vimeo.com/video/22439234', undefined, true);
 ```
 
 ### Bounce rate

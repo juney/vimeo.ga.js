@@ -3,12 +3,18 @@
  * Copyright (c) 2012 - 2013 Sander Heilbron (http://sanderheilbron.nl)
  * MIT licensed
  */
- 
+
 $(function() {
     var f = $('iframe'),
-        url = f.attr('src').split('?')[0],
+        url = f.attr('src').split('?')[0], // source URL
+        urlRE = new RegExp(/^http:/), // source URL regular expression
         trackProgress = f.data('progress'), // Data attribute to enable progress tracking
         trackSeeking = f.data('seek'); // Data attribute to enable seek tracking
+
+    // check if
+    if (urlRE.test(url) == false) {
+        url = 'http:' + url
+    }
 
     // Listen for messages from the player
     if (window.addEventListener) {
@@ -19,44 +25,44 @@ $(function() {
 
     // Handle messages received from the player
     function onMessageReceived(e) {
-        if (e.origin !== "http://player.vimeo.com" || typeof _gaq === 'undefined') {
-         return;
+        if (e.origin !== "http://player.vimeo.com") {
+            return;
         }
         var data = JSON.parse(e.data);
 
         switch (data.event) {
-        case 'ready':
-            onReady();
-            break;
+            case 'ready':
+                onReady();
+                break;
 
-        case 'playProgress':
-            onPlayProgress(data.data);
-            break;
+            case 'playProgress':
+                onPlayProgress(data.data);
+                break;
 
-        case 'seek':
-            if (trackSeeking && !videoSeeking) {
-                _gaq.push(['_trackEvent', 'Vimeo', 'Skipped video forward or backward', url, undefined, true]);
-                videoSeeking = true; // Avoid subsequent seek trackings
-            }
-            break;
+            case 'seek':
+                if (trackSeeking && !videoSeeking) {
+                    ga('send', 'event', 'Vimeo', 'Skipped video forward or backward', url, undefined, true);
+                    videoSeeking = true; // Avoid subsequent seek trackings
+                }
+                break;
 
-        case 'play':
-            if (!videoPlayed) {
-                _gaq.push(['_trackEvent', 'Vimeo', 'Started video', url, undefined, true]);             
-                videoPlayed = true; //  Avoid subsequent play trackings
-            }
-            break;
+            case 'play':
+                if (!videoPlayed) {
+                    ga('send', 'event', 'Vimeo', 'Started video', url, undefined, true);
+                    videoPlayed = true; //  Avoid subsequent play trackings
+                }
+                break;
 
-        case 'pause':
-            onPause();
-            break;
+            case 'pause':
+                onPause();
+                break;
 
-        case 'finish':
-            if (!videoCompleted) {
-                _gaq.push(['_trackEvent', 'Vimeo', 'Completed video', url, undefined, true]);
-                videoCompleted = true; // Avoid subsequent finish trackings
-            }
-            break;
+            case 'finish':
+                if (!videoCompleted) {
+                    ga('send', 'event', 'Vimeo', 'Completed video', url, undefined, true);
+                    videoCompleted = true; // Avoid subsequent finish trackings
+                }
+                break;
         }
     }
 
@@ -87,24 +93,24 @@ $(function() {
         videoSeeking = false;
         videoCompleted = false;
     }
-    
-    function onPause() {
-     if (timePercentComplete < 99 && !videoPaused) {
-      _gaq.push(['_trackEvent', 'Vimeo', 'Paused video', url, undefined, true]);
-      videoPaused = true; // Avoid subsequent pause trackings
-      }
-     }
 
-    // Tracking video progress 
+    function onPause() {
+        if (timePercentComplete < 99 && !videoPaused) {
+            ga('send', 'event', 'Vimeo', 'Paused video', url, undefined, true);
+            videoPaused = true; // Avoid subsequent pause trackings
+        }
+    }
+
+    // Tracking video progress
     function onPlayProgress(data) {
         timePercentComplete = Math.round((data.percent) * 100); // Round to a whole number
-        
+
         if (!trackProgress) {
-         return;
+            return;
         }
-        
+
         var progress;
-        
+
         if (timePercentComplete > 24 && !progress25) {
             progress = 'Played video: 25%';
             progress25 = true;
@@ -119,9 +125,9 @@ $(function() {
             progress = 'Played video: 75%';
             progress75 = true;
         }
-        
+
         if (progress) {
-            _gaq.push(['_trackEvent', 'Vimeo', progress, url, undefined, true]);
+            ga('send', 'event', 'Vimeo', progress, url, undefined, true);
         }
     }
 
