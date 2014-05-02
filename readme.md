@@ -12,7 +12,7 @@ Include the scripts in the body section of the HTML document, just before the `<
 ```	
 ### With some options
 ```html
-<iframe src="http://player.vimeo.com/video/22439234?api=1" width="640" height="390" frameborder="0" data-progress="true" data-seek="true" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<iframe src="//player.vimeo.com/video/22439234?api=1" width="640" height="390" frameborder="0" data-progress="true" data-seek="true" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js'></script>
 <script src="path/to/vimeo.ga.min.js"></script>
 ```
@@ -32,43 +32,43 @@ Tested in Chrome (21), Firefox (15), Safari (5,6), IE (8,9). Also tested on iOS.
 All player events are only tracked once. Restarting the video will not reset the event trackers.
 
 ### Default event trackers
-* Category: Vimeo
+* Category: vimeo
 * Action:
-	* **Started video**: when the video starts playing.
-	* **Paused video**: when the video is paused.
-	* **Completed video**: when the video reaches 100% completion.
+	* **started video**: when the video starts playing.
+	* **paused video**: when the video is paused.
+	* **completed video**: when the video reaches 100% completion.
 * Label: URL of embedded video on Vimeo.
 
 #####Example
 ```js
-ga('send', 'event', 'Vimeo', 'Started video', 'http://player.vimeo.com/video/22439234', undefined, true);
-ga('send', 'event', 'Vimeo', 'Paused video', 'http://player.vimeo.com/video/22439234', undefined, true);
-ga('send', 'event', 'Vimeo', 'Completed video', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'vimeo', 'started video', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'vimeo', 'paused video', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'vimeo', 'completed video', 'http://player.vimeo.com/video/22439234', undefined, true);
 ```
 ### Progress event trackers
 
-* Category: Vimeo
+* Category: vimeo
 * Action:
-	* **25% Progress**: when the video reaches 25% of the total video time.
-	* **50% Progress**: when the video reaches 50% of the total video time.
-	* **75% Progress**: when the video reaches 75% of the total video time.
+	* **25% progress**: when the video reaches 25% of the total video time.
+	* **50% progress**: when the video reaches 50% of the total video time.
+	* **75% progress**: when the video reaches 75% of the total video time.
 * Label: URL of embedded video on Vimeo.
 
 #####Example
 ```js
-ga('send', 'event', 'Vimeo', 'Played video: 25%', 'http://player.vimeo.com/video/22439234', undefined, true);
-ga('send', 'event', 'Vimeo', 'Played video: 50%', 'http://player.vimeo.com/video/22439234', undefined, true);
-ga('send', 'event', 'Vimeo', 'Played video: 75%', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'vimeo', 'played video: 25%', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'vimeo', 'played video: 50%', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'vimeo', 'played video: 75%', 'http://player.vimeo.com/video/22439234', undefined, true);
 ```
 ### Seek event tracker
-* Category: Vimeo
+* Category: vimeo
 * Action:
-	* **Skipped video**: when the video is skipped forward or backward.
+	* **skipped video**: when the video is skipped forward or backward.
 * Label: URL of embedded video on Vimeo.
 
 #####Example
 ```js
-ga('send', 'event', 'Vimeo', 'Skipped video forward or backward', 'http://player.vimeo.com/video/22439234', undefined, true);
+ga('send', 'event', 'vimeo', 'skipped video forward or backward', 'http://player.vimeo.com/video/22439234', undefined, true);
 ```
 
 ### Bounce rate
@@ -78,6 +78,9 @@ The event trackers do not impact bounce rate of the page which embeds the video.
 Have a bug? Please create an issue here on GitHub!
 
 ## Changelog
+
+### 0.4 (May 2, 2014):
+ * Update to handle HTTPS as well as HTTP.
 
 ### 0.3 (May 1, 2014):
  * Modify to work with Universal Analytics (analytics.js).
